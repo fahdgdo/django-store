@@ -1,17 +1,11 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.utils import timezone
-
+from django.shortcuts import render, get_object_or_404
+from .models import Product
 
 # Create your views here.
+def products_list(request):
+    products = Product.objects.all()
+    return render(request, 'products/products-list.html', {'products':products})
 
-def say_hi(request, name):
-    return render(request, 'say-hi.html', {'name':name})
-
-
-def show_time(request, name):
-    now = timezone.now()
-    form_now=now.strftime("%A, %d %B, %Y at %X")
-    #time={'now':now}
-    #return HttpResponse('show-time.html', form_now)
-    return render(request, 'show-time.html', {'name':form_now})
+def product_details(request,pk):
+    product = get_object_or_404(Product,pk=pk)
+    return render(request, 'products/product-details.html', {'product':product})
