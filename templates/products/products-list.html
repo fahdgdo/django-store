@@ -7,16 +7,18 @@
 </head>
 <body>
     <h1>Products:</h1>
-    {% for product in products %}
+    {% if products %}
     <ul>
+        {% for product in products %}
         <li>
-            <a href="{{ product.get_absolute_url }}">
-                <h2>{{product.title}}</h2>
-            </a>
-            
+            <a href="{{ product.get_absolute_url }}"> 
+                <h2>{{product.title}}</h2>    
+            </a> 
         </li>
+        {% endfor %} 
     </ul>
-
-    {% endfor %}
+   {% else %}
+    <h3>No Product Yet</h3>
+   {% endif %} 
 </body>
 </html>
